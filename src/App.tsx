@@ -393,7 +393,11 @@ function App() {
         throw new Error('Token Clerk non disponibile.')
       }
 
-      const response = await fetch('/api/firebase-token', {
+      const firebaseTokenEndpoint = import.meta.env.DEV
+        ? '/api/firebase-token'
+        : '/.netlify/functions/firebase-token'
+
+      const response = await fetch(firebaseTokenEndpoint, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${clerkToken}`
