@@ -1,0 +1,14 @@
+<svg width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1DC6FF" />
+      <stop offset="1" stop-color="#04597B" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" rx="40" fill="#091925" />
+  <path d="M0 320C80 280 160 360 240 336C320 312 400 232 480 248C560 264 640 336 640 336V480H0V320Z" fill="url(#waveGradient)" opacity="0.92"/>
+  <circle cx="180" cy="170" r="68" fill="#1dc6ff" opacity="0.24" />
+  <circle cx="520" cy="110" r="42" fill="#54d4f1" opacity="0.34" />
+  <circle cx="420" cy="240" r="16" fill="#89ecff" opacity="0.6" />
+  <path d="M112 384C135 350 194 364 221 352C256 336 272 286 310 282C348 278 360 322 400 326C444 330 460 300 500 292" stroke="#92e6ff" stroke-width="10" stroke-linecap="round" opacity="0.75"/>
+</svg>

@@ -1,0 +1,31 @@
+{
+  "name": "umibi-italia",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@clerk/backend": "^2.33.3",
+    "@clerk/clerk-react": "^5.61.3",
+    "exceljs": "^4.4.0",
+    "firebase": "^12.13.0",
+    "firebase-admin": "^13.10.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0",
+    "vite-plugin-pwa": "^1.3.0"
+  },
+  "overrides": {
+    "@clerk/shared": "3.47.5"
+  }
+}

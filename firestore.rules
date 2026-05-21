@@ -1,0 +1,67 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userEmail() {
+      return request.auth.token.clerkEmail;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && userEmail() in [
+          'alessandra.gruosso@alma-studiomarketing.com',
+          'marco.gerli@ssisrl.net',
+          'alessandra.gruosso@outlook.it'
+        ];
+    }
+
+    function isValidOrderCreate() {
+      return request.resource.data.keys().hasOnly([
+          'id',
+          'createdAt',
+          'customerName',
+          'customerEmail',
+          'ownerUid',
+          'ownerEmail',
+          'items',
+          'total',
+          'status'
+        ])
+        && request.resource.data.id is string
+        && request.resource.data.createdAt is string
+        && request.resource.data.customerName is string
+        && request.resource.data.customerEmail is string
+        && request.resource.data.customerEmail == userEmail()
+        && request.resource.data.ownerUid is string
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerEmail is string
+        && request.resource.data.ownerEmail == userEmail()
+        && request.resource.data.items is list
+        && request.resource.data.total is number
+        && request.resource.data.status == 'confirmed';
+    }
+
+    function canReadOrder() {
+      return isAdmin()
+        || (isSignedIn() && (
+          resource.data.ownerUid == request.auth.uid ||
+          resource.data.customerEmail == userEmail() ||
+          resource.data.ownerEmail == userEmail()
+        ));
+    }
+
+    match /orders/{orderId} {
+      allow create: if isSignedIn() && isValidOrderCreate();
+      allow read: if canReadOrder();
+      allow update, delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

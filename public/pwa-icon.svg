@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#091925" />
+      <stop offset="1" stop-color="#0F3550" />
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1DC6FF" />
+      <stop offset="1" stop-color="#57E0FF" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#bg)" />
+  <circle cx="164" cy="160" r="68" fill="#1DC6FF" opacity="0.18" />
+  <circle cx="350" cy="110" r="40" fill="#57E0FF" opacity="0.26" />
+  <path d="M48 332C112 292 182 364 248 340C314 316 372 236 436 252C468 260 492 276 512 292V512H48V332Z" fill="url(#wave)" opacity="0.9" />
+  <path d="M96 356C128 334 176 340 214 326C250 314 280 278 320 274C360 270 384 302 424 306" stroke="#BFF3FF" stroke-width="18" stroke-linecap="round" opacity="0.8" />
+  <circle cx="264" cy="220" r="14" fill="#D9FBFF" opacity="0.85" />
+  <path d="M198 182H314C336 182 352 198 352 220V258C352 280 336 296 314 296H282L256 322L230 296H198C176 296 160 280 160 258V220C160 198 176 182 198 182Z" fill="#EAFBFF" opacity="0.94" />
+  <path d="M206 224H306" stroke="#0B2740" stroke-width="18" stroke-linecap="round" />
+  <path d="M206 254H272" stroke="#0B2740" stroke-width="18" stroke-linecap="round" />
+</svg>

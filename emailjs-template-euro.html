@@ -1,0 +1,104 @@
+<div
+  style="
+    font-family: system-ui, sans-serif, Arial;
+    font-size: 14px;
+    color: #163047;
+    padding: 14px 8px;
+    background-color: #eef4f7;
+  "
+>
+  <div
+    style="
+      max-width: 600px;
+      margin: auto;
+      background-color: #fff;
+      border: 1px solid #d9e6ec;
+      border-radius: 16px;
+      overflow: hidden;
+    "
+  >
+    <div style="background: linear-gradient(135deg, #0ea5c6, #163047); padding: 18px 16px; color: #fff;">
+      <a
+        style="text-decoration: none; outline: none; margin-right: 8px; vertical-align: middle"
+        href="[Website Link]"
+        target="_blank"
+      >
+        <img
+          style="height: 32px; vertical-align: middle"
+          height="32px"
+          src="cid:logo.png"
+          alt="logo"
+        />
+      </a>
+      <span
+        style="
+          font-size: 16px;
+          vertical-align: middle;
+          border-left: 1px solid rgba(255,255,255,0.4);
+          padding-left: 8px;
+        "
+      >
+        <strong>Conferma Ordine Umibi Italia</strong>
+      </span>
+    </div>
+    <div style="padding: 0 16px 18px;">
+      <p style="margin-top: 16px;"><strong>Ciao {{customer_name}},</strong></p>
+      <p style="color: #4b5563;">Abbiamo ricevuto correttamente il tuo ordine e lo stiamo elaborando.</p>
+      <div
+        style="
+          text-align: left;
+          font-size: 14px;
+          padding: 12px 0 6px;
+          border-bottom: 2px solid #d9e6ec;
+        "
+      >
+        <strong>Ordine n. {{order_id}}</strong>
+      </div>
+      {{#orders}}
+      <table style="width: 100%; border-collapse: collapse">
+        <tr style="vertical-align: top">
+          <td style="padding: 18px 8px 0 4px; width: 100%">
+            <div style="font-weight: 600;">{{name}}</div>
+            <div style="font-size: 13px; color: #6b7280; padding-top: 4px">Quantità: {{units}}</div>
+          </td>
+          <td style="padding: 18px 4px 0 0; white-space: nowrap">
+            <strong>{{price}} €</strong>
+          </td>
+        </tr>
+      </table>
+      {{/orders}}
+      <div style="padding: 20px 0 10px;">
+        <div style="border-top: 2px solid #d9e6ec"></div>
+      </div>
+      <table style="border-collapse: collapse; width: 100%; text-align: right">
+        <tr>
+          <td style="width: 60%"></td>
+          <td>Spedizione</td>
+          <td style="padding: 8px; white-space: nowrap">{{cost.shipping}} €</td>
+        </tr>
+        <tr>
+          <td style="width: 60%"></td>
+          <td>Tasse</td>
+          <td style="padding: 8px; white-space: nowrap">{{cost.tax}} €</td>
+        </tr>
+        <tr>
+          <td style="width: 60%"></td>
+          <td style="border-top: 2px solid #d9e6ec">
+            <strong style="white-space: nowrap">Totale Ordine</strong>
+          </td>
+          <td style="padding: 16px 8px; border-top: 2px solid #d9e6ec; white-space: nowrap; color: #0ea5c6;">
+            <strong>{{cost.total}} €</strong>
+          </td>
+        </tr>
+      </table>
+      <div style="margin-top: 18px; font-size: 13px; color: #6b7280;">
+        Email cliente: {{customer_email}}
+      </div>
+    </div>
+  </div>
+  <div style="max-width: 600px; margin: auto">
+    <p style="color: #7b8794; font-size: 12px; text-align: center;">
+      Email inviata a {{email}}<br />Hai ricevuto questa email perché hai effettuato un ordine.
+    </p>
+  </div>
+</div>

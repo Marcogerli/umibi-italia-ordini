@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Presentazione App Umibi Italia</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Inter, "Segoe UI", sans-serif;
+  background: #e8f3f8;
+  color: #1a1a1a;
+}
+
+/* ── SLIDE ─────────────────────── */
+.slide {
+  width: 1060px;
+  min-height: 596px;
+  margin: 32px auto;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #19a2b8, #7de6f5);
+  z-index: 10;
+}
+
+.slide-number {
+  bottom: 18px; right: 28px;
+  font-size: 0.72rem; color: #94a3b8; font-weight: 600;
+}
+
+/* ── SPLIT SLIDE ─────────────────── */
+.slide-split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  min-height: 596px;
+}
+.split-left {
+  padding: 50px 40px 50px 56px;
+  display: flex; flex-direction: column; gap: 18px; justify-content: center;
+  border-right: 1px solid rgba(25,162,184,0.1);
+}
+.split-right {
+  padding: 16px;
+  background: #f0f7fa;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── INNER ───────────────────────── */
+.slide-inner {
+  padding: 50px 56px;
+  display: flex; flex-direction: column; gap: 22px; flex: 1;
+}
+
+/* ── COVER ───────────────────────── */
+.slide-cover { background: linear-gradient(145deg, #0f2f3f 0%, #0a1e2a 100%); }
+.slide-cover::before { background: linear-gradient(90deg, #19a2b8, #7de6f5); }
+.slide-cover h1 { color: #fff; font-size: 3.3rem; }
+.slide-cover .subtitle { color: rgba(255,255,255,0.65); }
+.slide-cover .tag { background: rgba(125,230,245,0.15); color: #7de6f5; }
+.slide-cover .slide-number { color: rgba(255,255,255,0.28); }
+.slide-cover .cover-meta { color: rgba(255,255,255,0.35); font-size: 0.83rem; margin-top: 28px; }
+
+/* ── TYPOGRAPHY ─────────────────── */
+.tag {
+  display: inline-block;
+  background: rgba(25,162,184,0.12); color: #19a2b8;
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em;
+  padding: 4px 12px; border-radius: 999px; align-self: flex-start;
+}
+h1 { font-size: 2.9rem; color: #0f2f3f; line-height: 1.1; }
+h2 { font-size: 1.82rem; color: #0f2f3f; line-height: 1.2; }
+.subtitle { font-size: 1.06rem; color: #4a5568; line-height: 1.7; max-width: 560px; }
+
+/* ── HELPERS ────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.card {
+  padding: 18px 20px; border: 1px solid rgba(25,162,184,0.2);
+  border-radius: 14px; background: #f8fbfc;
+}
+.card h3 { color: #19a2b8; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.card p, .card li { color: #334155; font-size: 0.88rem; line-height: 1.65; }
+.card ul { padding-left: 14px; }
+.card li { margin-bottom: 3px; }
+
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.check-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; color: #334155; line-height: 1.45; }
+.check-list li::before {
+  content: '✓'; flex-shrink: 0;
+  width: 20px; height: 20px;
+  background: linear-gradient(135deg,#19a2b8,#1391a8); color: #fff;
+  border-radius: 999px; display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; font-weight: 700; margin-top: 1px;
+}
+
+/* ── PRINT ───────────────────────── */
+@media print {
+  body { background: white; }
+  .slide { margin: 0; border-radius: 0; box-shadow: none; width: 100%; page-break-after: always; }
+  .topbar { display: none !important; }
+}
+.topbar {
+  width: 1060px; margin: 24px auto 0;
+  padding: 12px 20px; background: #fff;
+  border: 1px solid #fbbf24; border-radius: 12px;
+  font-size: 0.84rem; color: #92400e;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.pdf-btn {
+  padding: 9px 22px;
+  background: linear-gradient(135deg,#19a2b8,#1391a8);
+  color: #fff; border: none; border-radius: 999px;
+  font-size: 0.86rem; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.pdf-btn:hover { opacity: 0.88; }
+
+/* ═══════════════════════════════
+   APP MOCKUP COMPONENTS
+   ═══════════════════════════════ */
+
+/* Desktop chrome */
+.desktop-frame {
+  border-radius: 14px; border: 2.5px solid #94a3b8;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+  overflow: hidden; display: flex; flex-direction: column;
+  background: #fff;
+}
+.desktop-topbar {
+  height: 32px; background: #1e293b;
+  display: flex; align-items: center; padding: 0 12px; gap: 6px; flex-shrink: 0;
+}
+.dot { width: 10px; height: 10px; border-radius: 999px; }
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+.desktop-body { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+/* App header */
+.app-header {
+  height: 40px; background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid rgba(25,162,184,0.14);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 14px;
+  flex-shrink: 0;
+}
+.app-logo { width: 52px; height: 14px; background: linear-gradient(135deg,#19a2b8,#7de6f5); border-radius: 4px; }
+.app-header-right { display: flex; align-items: center; gap: 8px; }
+.icon-wrap { position: relative; display: inline-flex; }
+.icon-btn {
+  width: 24px; height: 24px; border-radius: 999px;
+  border: 1px solid rgba(25,162,184,0.4); background: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-btn svg { width: 13px; height: 13px; stroke: #147f95; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.badge {
+  min-width: 14px; height: 14px; padding: 0 3px;
+  border-radius: 999px; background: #19a2b8; color: #fff;
+  font-size: 0.5rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  position: absolute; top: -4px; right: -4px;
+}
+.user-dot { width: 22px; height: 22px; border-radius: 999px; background: linear-gradient(135deg,#19a2b8,#7de6f5); }
+.ghost-pill { height: 18px; padding: 0 8px; border: 1px solid #19a2b8; border-radius: 999px; font-size: 0.5rem; color: #19a2b8; display: flex; align-items: center; }
+
+/* Page body */
+.app-page { flex: 1; background: #f0f7fa; display: flex; flex-direction: column; padding: 10px 12px; gap: 8px; overflow: hidden; }
+.page-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.page-eyebrow { font-size: 0.5rem; color: #19a2b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; }
+.page-title { font-size: 0.72rem; font-weight: 700; color: #0f2f3f; margin-top: 1px; }
+.back-btn { height: 18px; padding: 0 10px; border: 1px solid #19a2b8; border-radius: 999px; font-size: 0.5rem; color: #19a2b8; background: transparent; display: flex; align-items: center; }
+
+/* White page card */
+.page-card { background: #fff; border: 1px solid rgba(25,162,184,0.14); border-radius: 12px; padding: 12px; }
+
+/* LOGIN */
+.login-shell { display: grid; grid-template-columns: 1.05fr 0.95fr; flex: 1; min-height: 0; }
+.login-hero {
+  background: linear-gradient(145deg,#0f2f3f,#0a1e2a);
+  padding: 18px 16px; display: flex; flex-direction: column; justify-content: center; gap: 8px;
+}
+.login-hero-logo { width: 34px; height: 18px; background: linear-gradient(135deg,#19a2b8,#7de6f5); border-radius: 4px; }
+.login-hero-brand { font-size: 0.56rem; font-weight: 700; color: #7de6f5; letter-spacing: 0.08em; margin-top: 2px; }
+.login-hero h4 { font-size: 0.96rem; color: #fff; line-height: 1.25; margin-top: 4px; }
+.login-hero p { font-size: 0.55rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.hero-pills { display: flex; gap: 5px; margin-top: 8px; }
+.hero-pill { height: 18px; padding: 0 8px; border-radius: 999px; border: 1px solid rgba(125,230,245,0.4); font-size: 0.5rem; color: #7de6f5; display: flex; align-items: center; }
+.hero-pill.dim { border-color: rgba(125,230,245,0.2); color: rgba(125,230,245,0.5); }
+.login-form {
+  background: #fff; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 7px; justify-content: center;
+}
+.form-eyebrow { font-size: 0.5rem; color: #19a2b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.12em; }
+.form-title { font-size: 0.7rem; font-weight: 700; color: #0f2f3f; margin-top: 1px; }
+.form-field-label { font-size: 0.52rem; color: #64748b; }
+.form-field { height: 22px; border: 1px solid rgba(25,162,184,0.28); border-radius: 6px; background: #f8fbfc; }
+.form-submit { height: 22px; background: linear-gradient(135deg,#19a2b8,#1391a8); border-radius: 6px; }
+.form-link { font-size: 0.5rem; color: #19a2b8; text-align: center; }
+.form-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+.form-toggle-btn { height: 18px; padding: 0 8px; border: 1px solid #19a2b8; border-radius: 999px; font-size: 0.48rem; color: #19a2b8; display: flex; align-items: center; }
+
+/* HOME NAV */
+.home-hero-strip {
+  height: 72px; background: center/cover no-repeat;
+  background-image: linear-gradient(130deg,rgba(10,30,42,0.92) 0%,rgba(10,30,42,0.55) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>');
+  background-color: #0f2f3f;
+  display: flex; flex-direction: column; justify-content: center; padding: 0 16px; gap: 2px; flex-shrink: 0;
+}
+.hero-ew { font-size: 0.48rem; color: #7de6f5; text-transform: uppercase; font-weight: 700; letter-spacing: 0.12em; }
+.hero-h { font-size: 0.9rem; color: #fff; font-weight: 700; }
+.hero-sub { font-size: 0.52rem; color: rgba(255,255,255,0.58); }
+.nav-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; padding: 10px; flex: 1; }
+.nav-card {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 10px 4px; border: 1px solid rgba(25,162,184,0.18); border-radius: 10px;
+  background: #fff; font-size: 0.56rem; font-weight: 700; color: #0f2f3f;
+}
+.nav-icon {
+  width: 28px; height: 28px; border-radius: 999px;
+  background: rgba(25,162,184,0.1); border: 1px solid rgba(25,162,184,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-icon svg { width: 13px; height: 13px; stroke: #147f95; stroke-width: 1.7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.nav-sub { font-size: 0.46rem; color: #718096; text-align: center; font-weight: 400; }
+
+/* ORDER TABLE */
+.toolbar { display: grid; grid-template-columns: 1.4fr 0.7fr; gap: 6px; }
+.mock-input { height: 22px; border: 1px solid rgba(25,162,184,0.25); border-radius: 7px; background: #fff; }
+.tbl-wrap { flex: 1; overflow: hidden; border: 1px solid rgba(25,162,184,0.14); border-radius: 8px; background: #fff; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 0.49rem; }
+.tbl th { padding: 4px 5px; background: rgba(25,162,184,0.07); font-weight: 700; color: #334155; border-bottom: 1px solid rgba(25,162,184,0.1); text-align: left; }
+.tbl td { padding: 4px 5px; border-bottom: 1px solid rgba(25,162,184,0.07); color: #334155; vertical-align: middle; }
+.tbl tr:last-child td { border-bottom: none; }
+.thumb { width: 20px; height: 20px; border-radius: 4px; }
+.add-btn { height: 16px; padding: 0 6px; background: linear-gradient(135deg,#19a2b8,#1391a8); border-radius: 4px; font-size: 0.47rem; color: #fff; display: flex; align-items: center; white-space: nowrap; }
+.qty-input { width: 26px; height: 16px; border: 1px solid rgba(25,162,184,0.3); border-radius: 4px; background: #f8fbfc; }
+
+/* CART */
+.cart-items { display: flex; flex-direction: column; gap: 6px; }
+.cart-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 8px; background: #fff; border-radius: 9px; border: 1px solid rgba(25,162,184,0.12);
+}
+.cart-item-thumb { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; }
+.cart-item-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.cart-item-name { font-size: 0.56rem; font-weight: 700; color: #0f2f3f; }
+.cart-item-price { font-size: 0.49rem; color: #64748b; }
+.cart-item-qty { display: flex; align-items: center; gap: 4px; }
+.remove-btn { height: 16px; padding: 0 6px; border: 1px solid #e2e8f0; border-radius: 4px; font-size: 0.46rem; color: #94a3b8; display: flex; align-items: center; }
+.cart-footer { padding: 8px 12px; background: #fff; border-top: 1px solid rgba(25,162,184,0.1); display: flex; justify-content: flex-end; gap: 7px; flex-shrink: 0; }
+.btn-ghost-sm { height: 20px; padding: 0 10px; border: 1px solid #19a2b8; border-radius: 999px; font-size: 0.5rem; color: #19a2b8; display: flex; align-items: center; }
+.btn-teal-sm { height: 20px; padding: 0 12px; background: linear-gradient(135deg,#19a2b8,#1391a8); border-radius: 999px; font-size: 0.5rem; color: #fff; font-weight: 700; display: flex; align-items: center; }
+
+/* HISTORY */
+.hist-list { display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+.hist-card { background: #fff; border: 1px solid rgba(25,162,184,0.17); border-radius: 9px; padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
+.hist-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.hist-id { font-size: 0.56rem; font-weight: 700; color: #0f2f3f; }
+.hist-date { font-size: 0.48rem; color: #64748b; margin-top: 1px; }
+.hist-reorder { height: 18px; padding: 0 8px; background: linear-gradient(135deg,#19a2b8,#1391a8); border-radius: 5px; font-size: 0.47rem; color: #fff; display: flex; align-items: center; white-space: nowrap; }
+.hist-rows { border: 1px solid rgba(25,162,184,0.12); border-radius: 6px; overflow: hidden; }
+.hist-row { display: grid; grid-template-columns: 1.9fr 1fr 0.7fr; padding: 3px 6px; font-size: 0.48rem; color: #334155; border-bottom: 1px solid rgba(25,162,184,0.08); }
+.hist-row:last-child { border-bottom: 0; }
+.hist-total { font-size: 0.54rem; font-weight: 700; color: #0f2f3f; }
+
+/* CONTACTS */
+.contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.contact-card { background: #fff; border: 1px solid rgba(25,162,184,0.17); border-radius: 8px; padding: 9px 10px; }
+.contact-card h6 { font-size: 0.5rem; color: #19a2b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 5px; }
+.contact-card p { font-size: 0.49rem; color: #334155; line-height: 1.6; }
+.contact-card .link { color: #19a2b8; }
+.contact-full { grid-column: 1/-1; }
+
+/* FORGOT */
+.fp-form { display: flex; flex-direction: column; gap: 8px; }
+.fp-step { display: flex; gap: 7px; align-items: flex-start; }
+.fp-step-badge { width: 17px; height: 17px; border-radius: 999px; background: #19a2b8; color: #fff; font-size: 0.52rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.fp-step-content { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.fp-step-label { font-size: 0.52rem; font-weight: 700; color: #0f2f3f; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>📄 Per salvare come PDF: clicca il pulsante → nella finestra di stampa cambia <strong>Destinazione</strong> in <strong>"Salva come PDF"</strong> → Salva.</span>
+  <button class="pdf-btn" onclick="window.print()">Salva come PDF</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1: COVER
+══════════════════════════════════════════ -->
+<div class="slide slide-cover">
+  <div class="slide-inner">
+    <div class="tag">Umibi Italia · Aprile 2026</div>
+    <h1>Portale Ordini<br/>Umibi Italia</h1>
+    <p class="subtitle">Applicazione web B2B per la gestione degli ordini di pesce fresco e prodotti ittici — pensata per ristoranti, sushi bar e attività horeca.</p>
+    <p class="cover-meta">React 18 · TypeScript · Vite 5 · Clerk Auth · EmailJS &nbsp;|&nbsp; Aprile 2026</p>
+  </div>
+  <span class="slide-number">1 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2: LOGIN
+══════════════════════════════════════════ -->
+<div class="slide slide-split">
+  <div class="split-left">
+    <div class="tag">Accesso</div>
+    <h2>Schermata di Login</h2>
+    <ul class="check-list">
+      <li>Accesso con email e password personale</li>
+      <li>Registrazione nuovo cliente</li>
+      <li>Recupero password via codice OTP ricevuto per email</li>
+      <li>Ogni cliente vede solo i propri ordini e dati</li>
+    </ul>
+  </div>
+  <div class="split-right">
+    <div class="desktop-frame" style="width:520px;">
+      <img src="public/screen-login-reale.png" alt="Schermata reale login Umibi Italia" style="width:100%;display:block;" />
+    </div>
+  </div>
+  <span class="slide-number">2 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3: HOME
+══════════════════════════════════════════ -->
+<div class="slide slide-split">
+  <div class="split-left">
+    <div class="tag">Home</div>
+    <h2>Dashboard cliente</h2>
+    <ul class="check-list">
+      <li>Header con logo Umibi, carrello con badge e pulsante Esci</li>
+      <li>Nuovo pulsante Admin nell’header per gli utenti autorizzati</li>
+      <li>Banner di benvenuto con nome del cliente loggato</li>
+      <li>3 card di navigazione rapida: Nuovo Ordine, Storico, Contatti</li>
+      <li>Grafica aggiornata con icone e pulsanti più chiari</li>
+    </ul>
+  </div>
+  <div class="split-right">
+    <div class="desktop-frame" style="width:520px;">
+      <img src="public/screen-home-reale.png" alt="Schermata reale home Umibi Italia" style="width:100%;display:block;" />
+    </div>
+  </div>
+  <span class="slide-number">3 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4: NUOVO ORDINE
+══════════════════════════════════════════ -->
+<div class="slide slide-split">
+  <div class="split-left">
+    <div class="tag">Catalogo</div>
+    <h2>Nuovo Ordine</h2>
+    <ul class="check-list">
+      <li>52 prodotti con foto, categoria, prezzo e unità (kg/pz)</li>
+      <li>Barra di ricerca per nome prodotto in tempo reale</li>
+      <li>Filtro per categoria (Salmone, Gamberi, Tonno…)</li>
+      <li>Campo quantità con step corretto per kg (0,1) o pz (1)</li>
+      <li>Feedback "Aggiunto al carrello" per ogni prodotto</li>
+      <li>Layout responsive e grafica aggiornata per desktop e mobile</li>
+    </ul>
+  </div>
+  <div class="split-right">
+    <div class="desktop-frame" style="width:520px;">
+      <img src="public/screen-ordine-reale.png" alt="Schermata reale nuovo ordine Umibi Italia" style="width:100%;display:block;" />
+    </div>
+  </div>
+  <span class="slide-number">4 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5: CARRELLO
+══════════════════════════════════════════ -->
+<div class="slide slide-split">
+  <div class="split-left">
+    <div class="tag">Carrello</div>
+    <h2>Revisione e invio ordine</h2>
+    <ul class="check-list">
+      <li>Lista articoli con quantità modificabile</li>
+      <li>Rimozione singolo prodotto o svuota carrello</li>
+      <li>Pulsante "Invia Ordine" → email automatica a Umibi e al cliente</li>
+      <li>Conferma di invio con messaggio di successo</li>
+      <li>Nuova schermata post invio senza il messaggio di carrello vuoto</li>
+      <li>Pulsanti rapidi per tornare alla home o allo storico ordini</li>
+    </ul>
+  </div>
+  <div class="split-right">
+    <div class="desktop-frame" style="width:520px;">
+      <img src="public/screen-carrello-reale.png" alt="Schermata reale carrello Umibi Italia" style="width:100%;display:block;" />
+    </div>
+  </div>
+  <span class="slide-number">5 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6: STORICO
+══════════════════════════════════════════ -->
+<div class="slide slide-split">
+  <div class="split-left">
+    <div class="tag">Storico Ordini</div>
+    <h2>Ordini precedenti</h2>
+    <ul class="check-list">
+      <li>Lista completa degli ordini inviati da quell'account</li>
+      <li>Data, ora, prodotti con prezzo e quantità, totale stimato</li>
+      <li>Pulsante "Riordina e modifica" carica l'ordine nel carrello</li>
+      <li>Da lì si possono aggiungere, modificare o rimuovere prodotti</li>
+    </ul>
+  </div>
+  <div class="split-right">
+    <div class="desktop-frame" style="width:520px;">
+      <img src="public/screen-storico-reale.png" alt="Schermata reale storico ordini Umibi Italia" style="width:100%;display:block;" />
+    </div>
+  </div>
+  <span class="slide-number">6 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 7: CONTATTI
+══════════════════════════════════════════ -->
+<div class="slide slide-split">
+  <div class="split-left">
+    <div class="tag">Contatti</div>
+    <h2>Scheda Umibi Italia</h2>
+    <ul class="check-list">
+      <li>Sede legale e Partita IVA ufficiale</li>
+      <li>Email cliccabile <strong>info@umibi.fish</strong></li>
+      <li>Link diretto al sito e al form di contatto ufficiale</li>
+      <li>Descrizione aziendale per il cliente</li>
+    </ul>
+  </div>
+  <div class="split-right">
+    <div class="desktop-frame" style="width:520px;">
+      <img src="public/screen-contatti-reale.png" alt="Schermata reale contatti Umibi Italia" style="width:100%;display:block;" />
+    </div>
+  </div>
+  <span class="slide-number">7 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 8: ADMIN
+══════════════════════════════════════════ -->
+<div class="slide slide-split">
+  <div class="split-left">
+    <div class="tag">Admin</div>
+    <h2>Pannello amministrazione ordini</h2>
+    <ul class="check-list">
+      <li>visualizzazione centralizzata di tutti gli ordini cliente</li>
+      <li>ricerca per cliente, email e numero ordine</li>
+      <li>aggiornamento stato ordine (confermato, lavorazione, spedito, annullato)</li>
+      <li>statistiche live: fatturato, top clienti, top prodotti</li>
+      <li>pulsante export XLS multi-foglio</li>
+    </ul>
+  </div>
+  <div class="split-right">
+    <div class="desktop-frame" style="width:520px;">
+      <img src="public/screen-admin-reale.png" alt="Schermata reale pannello admin Umibi Italia" style="width:100%;display:block;" />
+    </div>
+  </div>
+  <span class="slide-number">8 / 9</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 9: STATO FINALE
+══════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-inner">
+    <div class="tag">Stato finale</div>
+    <h2>Ultime evoluzioni già integrate</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Area admin</h3>
+        <ul>
+          <li>pannello Admin con ordini di tutti i clienti</li>
+          <li>filtro per cliente e ordine</li>
+          <li>cambio stato ordine e statistiche</li>
+          <li>notifiche browser per nuovi ordini in tempo reale</li>
+          <li>export Excel multi-foglio</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Grafica e app</h3>
+        <ul>
+          <li>nuovi bottoni e icone più leggibili</li>
+          <li>layout più pulito su desktop e mobile</li>
+          <li>PWA installabile da smartphone</li>
+          <li>icone aggiornate con logo Umibi</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box">
+      ✅ L'app è già completa per la demo finale: login, ordini, storico, admin, notifiche browser, statistiche, export Excel e versione installabile da mobile.
+    </div>
+  </div>
+  <span class="slide-number">9 / 9</span>
+</div>
+
+</body>
+</html>

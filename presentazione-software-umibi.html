@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentazione tecnica software Umibi Italia</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, "Segoe UI", sans-serif;
+      background: #e8f3f8;
+      color: #1a1a1a;
+    }
+
+    .topbar {
+      width: 1060px;
+      margin: 24px auto 0;
+      padding: 12px 20px;
+      background: #fff;
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      color: #92400e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pdf-btn {
+      padding: 9px 22px;
+      background: linear-gradient(135deg, #19a2b8, #1391a8);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .pdf-btn:hover { opacity: 0.9; }
+
+    .slide {
+      width: 1060px;
+      min-height: 596px;
+      margin: 32px auto;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #19a2b8, #7de6f5);
+      z-index: 10;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 18px;
+      right: 28px;
+      font-size: 0.72rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .slide-inner {
+      padding: 50px 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      flex: 1;
+    }
+
+    .slide-cover {
+      background: linear-gradient(145deg, #0f2f3f 0%, #0a1e2a 100%);
+    }
+
+    .slide-cover::before {
+      background: linear-gradient(90deg, #19a2b8, #7de6f5);
+    }
+
+    .slide-cover h1 {
+      color: #fff;
+      font-size: 3.1rem;
+      line-height: 1.08;
+    }
+
+    .slide-cover .subtitle { color: rgba(255,255,255,0.75); }
+    .slide-cover .tag { background: rgba(125,230,245,0.15); color: #7de6f5; }
+    .slide-cover .slide-number { color: rgba(255,255,255,0.28); }
+    .slide-cover .cover-meta { color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-top: 20px; }
+
+    .tag {
+      display: inline-block;
+      background: rgba(25,162,184,0.12);
+      color: #19a2b8;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      align-self: flex-start;
+    }
+
+    h1 { font-size: 2.7rem; color: #0f2f3f; line-height: 1.1; }
+    h2 { font-size: 1.8rem; color: #0f2f3f; line-height: 1.2; }
+    h3 { font-size: 1rem; color: #19a2b8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #4a5568;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px 20px;
+      border: 1px solid rgba(25,162,184,0.2);
+      border-radius: 14px;
+      background: #f8fbfc;
+    }
+
+    .card p, .card li {
+      color: #334155;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .card ul { padding-left: 18px; }
+    .card li { margin-bottom: 4px; }
+
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .check-list li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #19a2b8, #1391a8);
+      color: #fff;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .highlight-box {
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(25,162,184,0.08), rgba(125,230,245,0.12));
+      border: 1px solid rgba(25,162,184,0.2);
+      color: #0f2f3f;
+      font-size: 0.96rem;
+      line-height: 1.65;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(25,162,184,0.16);
+    }
+
+    th, td {
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(25,162,184,0.1);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    th {
+      background: rgba(25,162,184,0.08);
+      color: #0f2f3f;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .footer-note {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    @media print {
+      body { background: white; }
+      .slide {
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        width: 100%;
+        page-break-after: always;
+      }
+      .topbar { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span>📄 Per esportare in PDF: clicca il pulsante e nella stampa scegli Salva come PDF.</span>
+    <button class="pdf-btn" onclick="window.print()">Salva come PDF</button>
+  </div>
+
+  <div class="slide slide-cover">
+    <div class="slide-inner">
+      <div class="tag">Umibi Italia · Documento tecnico</div>
+      <h1>Software, servizi e strumenti<br />utilizzati per l’app</h1>
+      <p class="subtitle">Presentazione riepilogativa dell’infrastruttura tecnica già utilizzata, dei servizi configurati, dei costi indicativi e dei prossimi sviluppi previsti per l’app Umibi Italia.</p>
+      <p class="cover-meta">Stack web · servizi cloud · autenticazione · invio email · admin · export Excel · PWA · sviluppo mobile</p>
+    </div>
+    <span class="slide-number">1 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Base tecnica</div>
+      <h2>Software installati sul computer</h2>
+      <div class="three-col">
+        <div class="card">
+          <h3>Visual Studio Code</h3>
+          <p>Editor principale usato per scrittura codice, modifica file, test e manutenzione del progetto.</p>
+        </div>
+        <div class="card">
+          <h3>Node.js</h3>
+          <p>Necessario per avviare l’app in locale e generare la build finale. Include anche npm per le dipendenze.</p>
+        </div>
+        <div class="card">
+          <h3>Browser web</h3>
+          <p>Usato per provare l’app durante sviluppo e pubblicazione. Esempi: Chrome ed Edge.</p>
+        </div>
+      </div>
+      <div class="highlight-box">
+        Questi strumenti costituiscono la base minima per lavorare in autonomia sul progetto e generare nuove versioni dell’app.
+      </div>
+    </div>
+    <span class="slide-number">2 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Stack del progetto</div>
+      <h2>Librerie e tecnologie già utilizzate</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Frontend</h3>
+          <ul>
+            <li>React per costruire l’interfaccia</li>
+            <li>React DOM per la visualizzazione nel browser</li>
+            <li>TypeScript per un codice più controllato</li>
+            <li>Vite per avvio rapido e build</li>
+            <li>vite-plugin-pwa per la versione installabile</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Funzioni principali</h3>
+          <ul>
+            <li>login e registrazione utenti</li>
+            <li>gestione ordini e storico</li>
+            <li>pubblicazione online della demo</li>
+            <li>invio email automatiche di conferma</li>
+            <li>export ordini in Excel multi-foglio</li>
+          </ul>
+        </div>
+      </div>
+      <ul class="check-list">
+        <li>La struttura attuale è già adeguata per una web app dimostrativa e operativa.</li>
+        <li>La base può essere estesa in futuro con database cloud e pubblicazione mobile.</li>
+      </ul>
+    </div>
+    <span class="slide-number">3 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Servizi online</div>
+      <h2>Servizi configurati per il funzionamento dell’app</h2>
+      <div class="three-col">
+        <div class="card">
+          <h3>Clerk</h3>
+          <p>Gestisce autenticazione, registrazione, sessioni e recupero password.</p>
+        </div>
+        <div class="card">
+          <h3>EmailJS</h3>
+          <p>Invia l’ordine all’azienda e la conferma al cliente tramite template email.</p>
+        </div>
+        <div class="card">
+          <h3>Netlify</h3>
+          <p>Pubblica online la demo e genera un link pubblico accessibile via browser.</p>
+        </div>
+      </div>
+      <div class="highlight-box">
+        L’app è quindi già supportata da un ecosistema completo per autenticazione, comunicazione, pubblicazione online e installazione mobile.
+      </div>
+    </div>
+    <span class="slide-number">4 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Ultime implementazioni</div>
+      <h2>Admin, export Excel e PWA già integrati</h2>
+      <div class="three-col">
+        <div class="card">
+          <h3>Pannello admin</h3>
+          <ul>
+            <li>visualizzazione di tutti gli ordini</li>
+            <li>filtro per cliente e numero ordine</li>
+            <li>cambio stato ordine in tempo reale</li>
+            <li>statistiche con fatturato, clienti e prodotti</li>
+            <li>notifiche browser al ricevimento di nuovi ordini</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Export Excel</h3>
+          <ul>
+            <li>file XLSX multi-foglio</li>
+            <li>foglio ordini completo</li>
+            <li>foglio statistiche</li>
+            <li>top clienti e prodotti più ordinati</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>PWA e grafica</h3>
+          <ul>
+            <li>app installabile da smartphone</li>
+            <li>icone aggiornate con logo Umibi</li>
+            <li>nuovi bottoni e layout più chiaro</li>
+            <li>grafica responsive per mobile e desktop</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box">
+        Queste funzioni rappresentano la versione più recente dell’app e rendono il progetto più completo, professionale e adatto a un uso reale.
+      </div>
+    </div>
+    <span class="slide-number">5 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Evoluzione futura</div>
+      <h2>Database cloud e pubblicazione mobile</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Firebase per lo storico ordini</h3>
+          <ul>
+            <li>salvataggio ordini nel cloud</li>
+            <li>recupero dati da ogni dispositivo</li>
+            <li>storico utente permanente</li>
+            <li>possibile uso di Firestore e Hosting</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Pubblicazione sugli store</h3>
+          <ul>
+        <div class="card">
+          <h3>Firebase</h3>
+          <p>Salva gli ordini nel cloud tramite Firestore e rende lo storico disponibile anche da altri dispositivi.</p>
+        </div>
+            <li>Capacitor per trasformare la web app in app mobile</li>
+            <li>Android Studio per Android</li>
+            <li>Xcode e account Apple Developer per iPhone</li>
+            <li>preparazione icone, privacy policy e materiali store</li>
+          </ul>
+        </div>
+      </div>
+      <ul class="check-list">
+        <li>Firebase è già stato integrato per rendere lo storico realmente persistente e centralizzato.</li>
+        <li>Capacitor resta la soluzione più adatta per una futura pubblicazione nativa su Android e iPhone.</li>
+      </ul>
+    </div>
+    <span class="slide-number">6 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Costi e condizioni</div>
+      <h2>Piani free e a pagamento dei principali servizi</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Servizio</th>
+            <th>Piano gratuito</th>
+            <th>Piano a pagamento / note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Clerk</td>
+            <td>Hobby gratuito con autenticazione base</td>
+            <td>Pro da circa 20 dollari al mese; Business da circa 250 dollari al mese</td>
+          </tr>
+          <tr>
+            <td>EmailJS</td>
+            <td>200 richieste mensili e 2 template</td>
+            <td>Personal da 9 dollari, Professional da 15, Business da 40 al mese</td>
+          </tr>
+          <tr>
+            <td>Netlify</td>
+            <td>Free a 0 dollari con deploy base e SSL</td>
+            <td>Personal da 9 dollari, Pro da 20 dollari per membro al mese</td>
+          </tr>
+          <tr>
+            <td>Firebase</td>
+            <td>Piano Spark gratuito con quote iniziali</td>
+            <td>Piano Blaze a consumo in base a traffico e operazioni</td>
+          </tr>
+          <tr>
+            <td>Apple Developer</td>
+            <td>Account base gratuito per test iniziali</td>
+            <td>99 dollari l’anno per distribuire su App Store</td>
+          </tr>
+          <tr>
+            <td>Google Play Console</td>
+            <td>Nessun piano completo gratuito per pubblicazione commerciale</td>
+            <td>Richiede registrazione sviluppatore e quota prevista da Google</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="footer-note">I prezzi sono indicativi e possono variare nel tempo in base alle condizioni ufficiali dei fornitori.</p>
+    </div>
+    <span class="slide-number">7 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Conclusioni</div>
+      <h2>Situazione attuale e prossimi passaggi consigliati</h2>
+      <ul class="check-list">
+        <li>L’app Umibi Italia è già funzionante come web app con autenticazione, invio email e pubblicazione online.</li>
+        <li>La demo è già condivisibile via link pubblico.</li>
+        <li>Il pannello admin, le statistiche, l’export Excel e la PWA installabile sono già disponibili.</li>        <li>Le notifiche browser per i nuovi ordini sono attive e configurabili dall'admin.</li>        <li>Per una futura distribuzione come app nativa, il percorso consigliato resta la conversione tramite Capacitor.</li>
+        <li>Successivamente sarà possibile valutare la pubblicazione su Play Store e App Store.</li>
+      </ul>
+      <div class="highlight-box">
+        In sintesi: la base dell’app è pronta, stabile e già completata con le funzioni chiave richieste.
+      </div>
+    </div>
+    <span class="slide-number">8 / 8</span>
+  </div>
+</body>
+</html>

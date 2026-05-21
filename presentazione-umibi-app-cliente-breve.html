@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentazione App Umibi Italia - Versione Breve</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, "Segoe UI", sans-serif; background: #e8f3f8; color: #0f2f3f; }
+
+    .topbar {
+      width: 1060px; margin: 24px auto 0; padding: 12px 20px;
+      background: #fff; border: 1px solid #fbbf24; border-radius: 12px;
+      font-size: 0.84rem; color: #92400e;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+
+    .pdf-btn {
+      padding: 9px 22px; border: none; border-radius: 999px; cursor: pointer;
+      background: linear-gradient(135deg, #19a2b8, #1391a8);
+      color: #fff; font-size: 0.86rem; font-weight: 700;
+    }
+
+    .slide {
+      width: 1060px; min-height: 596px; margin: 32px auto;
+      background: #fff; border-radius: 24px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      position: relative; page-break-after: always;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .slide::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, #19a2b8, #7de6f5);
+    }
+
+    .slide-inner { padding: 46px 56px; display: flex; flex-direction: column; gap: 16px; }
+    .slide-number { position: absolute; right: 28px; bottom: 18px; font-size: 0.72rem; color: #94a3b8; }
+
+    .tag {
+      display: inline-block; align-self: flex-start; padding: 4px 12px; border-radius: 999px;
+      background: rgba(25,162,184,0.12); color: #19a2b8;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
+    .cover {
+      background: linear-gradient(145deg, #0f2f3f 0%, #0a1e2a 100%); color: #fff;
+    }
+
+    .cover h1 { color: #fff; font-size: 3rem; line-height: 1.08; }
+    .cover .tag { background: rgba(125,230,245,0.15); color: #7de6f5; }
+    .cover .subtitle { color: rgba(255,255,255,0.76); font-size: 1.02rem; line-height: 1.7; max-width: 760px; }
+    .cover .slide-number { color: rgba(255,255,255,0.35); }
+
+    .cover-logo { width: 180px; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25)); }
+    .cover-sign { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+
+    h2 { font-size: 1.85rem; line-height: 1.2; }
+
+    .two-col { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 16px; align-items: start; }
+
+    .card {
+      background: #f8fbfc; border: 1px solid rgba(25,162,184,0.2);
+      border-radius: 14px; padding: 18px 20px;
+    }
+
+    .card h3 {
+      font-size: 0.82rem; color: #19a2b8; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+
+    .card ul { padding-left: 18px; }
+    .card li, .card p { font-size: 0.92rem; line-height: 1.65; color: #334155; }
+
+    .shot { border: 1px solid rgba(15,47,63,0.12); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(15,47,63,0.10); }
+    .shot img { display: block; width: 100%; height: auto; }
+
+    .highlight {
+      border: 1px solid rgba(25,162,184,0.2); border-radius: 14px;
+      padding: 14px 16px; font-size: 0.95rem; line-height: 1.6;
+      background: linear-gradient(135deg, rgba(25,162,184,0.08), rgba(125,230,245,0.10));
+    }
+
+    @media print {
+      body { background: #fff; }
+      .topbar { display: none !important; }
+      .slide { width: 100%; margin: 0; border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span>Versione breve (4 slide) per invio cliente via email/WhatsApp. Usa il pulsante per creare il PDF.</span>
+    <button class="pdf-btn" onclick="window.print()">Salva come PDF</button>
+  </div>
+
+  <section class="slide cover">
+    <div class="slide-inner">
+      <img class="cover-logo" src="src/assets/logo%20Umibi%20Italia.png" alt="Logo Umibi Italia" />
+      <div class="tag">Umibi Italia · Versione Breve · Maggio 2026</div>
+      <h1>Portale Ordini<br />Umibi Italia</h1>
+      <p class="subtitle">Presentazione sintetica della soluzione già operativa: ordini, admin, statistiche, export XLS e app installabile.</p>
+      <p class="cover-sign">A cura di Marco Gerli</p>
+    </div>
+    <span class="slide-number">1 / 4</span>
+  </section>
+
+  <section class="slide">
+    <div class="slide-inner">
+      <div class="tag">Operatività</div>
+      <h2>Flusso cliente: Home, Nuovo Ordine, Carrello</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Funzioni principali</h3>
+          <ul>
+            <li>Accesso clienti con autenticazione</li>
+            <li>Catalogo con ricerca e filtri</li>
+            <li>Carrello con invio ordine email</li>
+            <li>Storico ordini personale</li>
+          </ul>
+        </div>
+        <div>
+          <div class="shot" style="margin-bottom:10px;"><img src="public/screen-home-reale.png" alt="Home reale" /></div>
+          <div class="shot" style="margin-bottom:10px;"><img src="public/screen-ordine-reale.png" alt="Nuovo ordine reale" /></div>
+          <div class="shot"><img src="public/screen-carrello-reale.png" alt="Carrello reale" /></div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-number">2 / 4</span>
+  </section>
+
+  <section class="slide">
+    <div class="slide-inner">
+      <div class="tag">Gestione</div>
+      <h2>Pannello Admin e controllo ordini</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Area amministrazione</h3>
+          <ul>
+            <li>Vista completa ordini di tutti i clienti</li>
+            <li>Filtri per cliente, email e numero ordine</li>
+            <li>Cambio stato ordine in tempo reale</li>
+            <li>Notifiche browser per nuovi ordini in tempo reale</li>
+            <li>Statistiche automatiche (fatturato/clienti/prodotti)</li>
+            <li>Esportazione XLS multi-foglio</li>
+          </ul>
+        </div>
+        <div class="shot"><img src="public/screen-admin-reale.png" alt="Admin reale" /></div>
+      </div>
+    </div>
+    <span class="slide-number">3 / 4</span>
+  </section>
+
+  <section class="slide">
+    <div class="slide-inner">
+      <div class="tag">Chiusura</div>
+      <h2>Stato progetto e prossimi passi</h2>
+      <div class="highlight">
+        Il progetto è completato nelle funzioni chiave richieste ed è già pronto per uso operativo: login, ordini, storico, admin, notifiche browser, statistiche, export XLS e PWA installabile.
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Già disponibile</h3>
+          <ul>
+            <li>Versione web pubblicata</li>
+            <li>Versione mobile installabile (PWA)</li>
+            <li>Icona app con logo Umibi</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Opzioni future</h3>
+          <ul>
+            <li>Rifinitura privacy policy in-app</li>
+            <li>Evoluzione EmailJS (piano/procedure avanzate)</li>
+            <li>Eventuali estensioni custom su richiesta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <span class="slide-number">4 / 4</span>
+  </section>
+</body>
+</html>

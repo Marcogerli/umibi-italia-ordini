@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposta economica Umibi Italia</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, "Segoe UI", sans-serif;
+      background: #e8f3f8;
+      color: #1a1a1a;
+    }
+
+    .topbar {
+      width: 1060px;
+      margin: 24px auto 0;
+      padding: 12px 20px;
+      background: #fff;
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      color: #92400e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pdf-btn {
+      padding: 9px 22px;
+      background: linear-gradient(135deg, #19a2b8, #1391a8);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .slide {
+      width: 1060px;
+      min-height: 596px;
+      margin: 32px auto;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #19a2b8, #7de6f5);
+      z-index: 10;
+    }
+
+    .slide-inner {
+      padding: 46px 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .slide-number {
+      position: absolute;
+      right: 28px;
+      bottom: 18px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .slide-cover {
+      background: linear-gradient(145deg, #0f2f3f 0%, #0a1e2a 100%);
+      color: #fff;
+    }
+
+    .slide-cover::before {
+      background: linear-gradient(90deg, #19a2b8, #7de6f5);
+    }
+
+    .cover-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+      height: 100%;
+    }
+
+    .cover-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cover-art {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(125,230,245,0.18);
+      border-radius: 22px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+    }
+
+    .cover-art img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 16px;
+      opacity: 0.92;
+    }
+
+    .brand-logo {
+      width: 180px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .tag {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(25,162,184,0.12);
+      color: #19a2b8;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .slide-cover .tag {
+      background: rgba(125,230,245,0.12);
+      color: #7de6f5;
+    }
+
+    h1 { font-size: 3rem; line-height: 1.06; color: #0f2f3f; }
+    h2 { font-size: 1.8rem; line-height: 1.2; color: #0f2f3f; }
+    .slide-cover h1 { color: #fff; }
+
+    .subtitle {
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: #4a5568;
+      max-width: 720px;
+    }
+
+    .slide-cover .subtitle { color: rgba(255,255,255,0.76); }
+    .cover-meta { color: rgba(255,255,255,0.42); font-size: 0.85rem; margin-top: 8px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px 20px;
+      background: #f8fbfc;
+      border: 1px solid rgba(25,162,184,0.18);
+      border-radius: 16px;
+    }
+
+    .card h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #19a2b8;
+      margin-bottom: 10px;
+    }
+
+    .card p, .card li {
+      font-size: 0.92rem;
+      color: #334155;
+      line-height: 1.65;
+    }
+
+    .card ul { padding-left: 18px; }
+    .card li { margin-bottom: 4px; }
+
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .check-list li::before {
+      content: '✓';
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #19a2b8, #1391a8);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 1fr;
+      gap: 16px;
+    }
+
+    .price-card {
+      border-radius: 18px;
+      border: 1px solid rgba(25,162,184,0.2);
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(15,47,63,0.06);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .price-card h3 {
+      color: #0f2f3f;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .price-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #19a2b8;
+      line-height: 1;
+    }
+
+    .price-note {
+      color: #64748b;
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .highlight-box {
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(25,162,184,0.08), rgba(125,230,245,0.12));
+      border: 1px solid rgba(25,162,184,0.2);
+      color: #0f2f3f;
+      font-size: 0.96rem;
+      line-height: 1.65;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(25,162,184,0.16);
+      font-size: 0.86rem;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid rgba(25,162,184,0.1);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    th {
+      background: rgba(25,162,184,0.08);
+      color: #0f2f3f;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    .small-note { font-size: 0.8rem; color: #64748b; }
+
+    @media print {
+      body { background: white; }
+      .topbar { display: none !important; }
+      .slide {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span>📄 Presentazione pronta da mostrare al cliente o salvare in PDF.</span>
+    <button class="pdf-btn" onclick="window.print()">Salva come PDF</button>
+  </div>
+
+  <div class="slide slide-cover">
+    <div class="slide-inner cover-grid">
+      <div class="cover-copy">
+        <img src="src/assets/logo Umibi Italia.png" alt="Logo Umibi Italia" class="brand-logo" />
+        <div class="tag">Proposta economica</div>
+        <h1>Offerta completa<br />App Umibi Italia</h1>
+        <p class="subtitle">Presentazione commerciale e tecnica dell’app realizzata per la gestione ordini, con indicazione dei servizi inclusi, del valore del progetto e delle possibili evoluzioni future.</p>
+        <p class="cover-meta">Aprile 2026 · Web App B2B · Preventivo indicativo</p>
+      </div>
+      <div class="cover-art">
+        <img src="src/assets/Foto Login.avif" alt="Anteprima Umibi Italia" />
+      </div>
+    </div>
+    <span class="slide-number">1 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Obiettivo</div>
+      <h2>Che cosa offre l’app al cliente</h2>
+      <ul class="check-list">
+        <li>accesso riservato con login e registrazione utenti</li>
+        <li>consultazione del catalogo prodotti</li>
+        <li>creazione ordine direttamente online</li>
+        <li>carrello con modifica quantità e reinvio</li>
+        <li>storico ordini personale</li>
+        <li>pannello admin con ordini, filtri e statistiche</li>
+        <li>notifiche browser per nuovi ordini in tempo reale</li>
+        <li>export Excel multi-foglio per gli ordini</li>
+        <li>installazione come PWA su smartphone e tablet</li>
+        <li>pagina contatti dedicata</li>
+        <li>invio automatico email ordine all’azienda e al cliente</li>
+      </ul>
+      <div class="highlight-box">
+        L’app è pensata per semplificare il processo di acquisto dei clienti Umibi Italia e per dare un’immagine più moderna, ordinata e professionale del servizio.
+      </div>
+    </div>
+    <span class="slide-number">2 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Contenuto del progetto</div>
+      <h2>Funzionalità già sviluppate</h2>
+      <div class="three-col">
+        <div class="card">
+          <h3>Area utente</h3>
+          <ul>
+            <li>registrazione</li>
+            <li>login</li>
+            <li>recupero password</li>
+            <li>profilo cliente</li>
+            <li>pannello admin</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Ordini</h3>
+          <ul>
+            <li>nuovo ordine</li>
+            <li>carrello</li>
+            <li>modifica quantità</li>
+            <li>storico ordini</li>
+            <li>export Excel</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Comunicazione</h3>
+          <ul>
+            <li>email conferma ordine</li>
+            <li>email all’azienda</li>
+            <li>pagina contatti</li>
+            <li>link demo pubblico</li>
+            <li>PWA con icona installabile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <span class="slide-number">3 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Tecnologia</div>
+      <h2>Struttura tecnica e servizi inclusi</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Stack principale</h3>
+          <ul>
+            <li>React + TypeScript</li>
+            <li>Vite per sviluppo e build</li>
+            <li>vite-plugin-pwa per la versione installabile</li>
+            <li>xlsx per l’export Excel</li>
+            <li>interfaccia responsive</li>
+            <li>catalogo prodotti integrato</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Servizi online</h3>
+          <ul>
+            <li>Clerk per autenticazione utenti</li>
+            <li>EmailJS per email automatiche</li>
+            <li>Netlify per la pubblicazione demo</li>
+            <li>Firebase per lo storico ordini cloud</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box">
+        La base attuale è già pronta per essere mostrata, testata e ampliata con ulteriori sviluppi professionali.
+      </div>
+    </div>
+    <span class="slide-number">4 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Proposta economica</div>
+      <h2>Valore consigliato da presentare al cliente</h2>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3>Sviluppo app web</h3>
+          <div class="price-value">€3.000</div>
+          <p class="price-note">Comprende la versione attuale completa, con login, ordini, storico, admin, notifiche browser, export Excel e PWA.</p>
+        </div>
+        <div class="price-card">
+          <h3>Canone assistenza</h3>
+          <div class="price-value">€80/mese</div>
+          <p class="price-note">Per piccoli aggiornamenti, supporto tecnico, controllo servizi e manutenzione ordinaria.</p>
+        </div>
+        <div class="price-card">
+          <h3>Extra futuri</h3>
+          <div class="price-value">su preventivo</div>
+          <p class="price-note">Privacy, evoluzioni EmailJS, PDF allegati, badge push numerico e future estensioni custom.</p>
+        </div>
+      </div>
+      <div class="highlight-box">
+        La fascia consigliata per questa soluzione, nello stato attuale, è tra €2.500 e €4.000. Una proposta da €3.000 risulta equilibrata e credibile.
+      </div>
+    </div>
+    <span class="slide-number">5 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Servizi e costi</div>
+      <h2>Piani gratuiti e a pagamento dei prodotti usati</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Servizio</th>
+            <th>Utilizzo</th>
+            <th>Piano free / payment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Clerk</td>
+            <td>Login e registrazione</td>
+            <td>Hobby gratuito; Pro da circa 20 dollari al mese</td>
+          </tr>
+          <tr>
+            <td>EmailJS</td>
+            <td>Invio email ordini</td>
+            <td>Free con 200 invii mensili; piani da 9, 15 e 40 dollari al mese</td>
+          </tr>
+          <tr>
+            <td>Netlify</td>
+            <td>Pubblicazione demo</td>
+            <td>Free a 0 dollari; Personal da 9 dollari, Pro da 20 dollari per membro</td>
+          </tr>
+          <tr>
+            <td>Firebase</td>
+            <td>Storico ordini cloud futuro</td>
+            <td>Spark gratuito; Blaze a consumo</td>
+          </tr>
+          <tr>
+            <td>Apple Developer</td>
+            <td>Pubblicazione App Store</td>
+            <td>99 dollari l’anno</td>
+          </tr>
+          <tr>
+            <td>Google Play Console</td>
+            <td>Pubblicazione Play Store</td>
+            <td>Richiede quota di registrazione sviluppatore</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small-note">Le cifre sono indicative e possono variare nel tempo in base alle condizioni ufficiali dei fornitori.</p>
+    </div>
+    <span class="slide-number">6 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Roadmap</div>
+      <h2>Sviluppi futuri proponibili al cliente</h2>
+      <div class="three-col">
+        <div class="card">
+          <h3>Privacy e conformità</h3>
+          <p>Pagina privacy, eventuale cookie policy e testi legali per la pubblicazione professionale del progetto.</p>
+          <p style="margin-top: 10px;"><strong>Quota indicativa:</strong> €250 – €600</p>
+        </div>
+        <div class="card">
+          <h3>Email avanzate</h3>
+          <p>Rinnovo della parte EmailJS oppure migrazione a invio con allegato PDF, foto prodotti e maggiore controllo.</p>
+          <p style="margin-top: 10px;"><strong>Quota indicativa:</strong> €600 – €1.500</p>
+        </div>
+        <div class="card">
+          <h3>Evoluzione mobile</h3>
+          <p>Ulteriori ottimizzazioni PWA, badge numerico sull'icona app (Android/iOS) e passaggio a una distribuzione mobile più spinta se richiesto.</p>
+          <p style="margin-top: 10px;"><strong>Quota indicativa:</strong> €1.500 – €4.000+</p>
+        </div>
+      </div>
+      <ul class="check-list">
+        <li>queste estensioni possono essere quotate separatamente come seconda fase del progetto</li>
+        <li>la struttura attuale è già adatta per supportare queste evoluzioni future</li>
+        <li>la parte già consegnata include le funzioni operative principali richieste dal cliente</li>
+      </ul>
+    </div>
+    <span class="slide-number">7 / 8</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Chiusura</div>
+      <h2>Conclusione commerciale</h2>
+      <div class="highlight-box">
+        L’app Umibi Italia rappresenta già una soluzione concreta e presentabile al cliente, con funzioni utili, immagine professionale e possibilità reale di espansione futura.
+      </div>
+      <ul class="check-list">
+        <li>progetto già funzionante e testabile</li>
+        <li>struttura moderna e coerente con il brand</li>
+        <li>base valida per un percorso di digitalizzazione più ampio</li>
+        <li>ottima presentazione iniziale per proposta commerciale e sviluppo futuro</li>
+      </ul>
+      <div class="highlight-box">
+        Proposta consigliata da presentare: <strong>€3.000 una tantum</strong> + <strong>€80/mese</strong> facoltativi per assistenza e aggiornamenti.
+      </div>
+    </div>
+    <span class="slide-number">8 / 9</span>
+  </div>
+
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="tag">Scenario economico finale</div>
+      <h2>Pacchetti e sviluppo progressivo del progetto</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pacchetto</th>
+            <th>Contenuto</th>
+            <th>Valore indicativo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pacchetto Base</strong></td>
+            <td>Web app completa con login, ordini, carrello, storico, contatti, email automatiche e demo online</td>
+            <td><strong>€3.000</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Pacchetto Evoluto</strong></td>
+            <td>Pacchetto base + database Firebase + storico cloud + miglior gestione dati</td>
+            <td><strong>€3.800 – €4.500</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Pacchetto Gestione</strong></td>
+            <td>Pacchetto evoluto + pannello admin + controllo ordini e visualizzazione interna</td>
+            <td><strong>€5.000 – €7.000</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Pacchetto Mobile</strong></td>
+            <td>Pacchetto gestione + conversione app Android/iPhone e preparazione per store</td>
+            <td><strong>€7.500 – €12.000+</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        Strategia consigliata: proporre subito il <strong>Pacchetto Base</strong> e presentare gli sviluppi successivi come fase 2 e fase 3, in modo da facilitare la vendita iniziale e aprire a futuri ampliamenti.
+      </div>
+    </div>
+    <span class="slide-number">9 / 9</span>
+  </div>
+</body>
+</html>
