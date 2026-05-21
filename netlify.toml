@@ -17,6 +17,7 @@
   from = "/api/firebase-token"
   to = "/.netlify/functions/firebase-token"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
